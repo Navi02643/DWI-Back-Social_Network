@@ -1,0 +1,30 @@
+{
+  "name": "dwi-back-social_network",
+  "version": "1.0.0",
+  "description": "This is the backend for the final project of DWI which consists of simulating a social network",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Navi02643/DWI-Back-Social_Network.git"
+  },
+  "author": "Alba Najera Susana, Castillo Sanchez Jose Guadalupe, Mercado Marin Carlos Ivan, Talamantes Castañeda Angela Maria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Navi02643/DWI-Back-Social_Network/issues"
+  },
+  "homepage": "https://github.com/Navi02643/DWI-Back-Social_Network#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
