@@ -12,7 +12,7 @@ app.get("/", async (req, res) => {
     return res.status(500).send({
       estatus: "500",
       err: true,
-      msg: "Error getting assigned equipments.",
+      msg: "Error",
       cont: {
         err: Object.keys(err).length === 0 ? err.message : err,
       },
