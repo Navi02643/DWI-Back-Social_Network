@@ -22,7 +22,7 @@ const userSchema = new Schema({
         required: [true,'the pass is required']
     },
     dateofbirth: {
-        type: Date,
+        type: Date ,
         required: [true,'the date of birth is required']
     }
 });
