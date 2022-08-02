@@ -34,4 +34,19 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      description: req.body.description,
+      completed: req.body.completed,
+      updatedAt: Date.now(),
+    });
+    res.json(updatedPost);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+
 module.exports = router;
