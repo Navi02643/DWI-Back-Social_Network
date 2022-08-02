@@ -48,5 +48,18 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.patch("/complete/:id", async (req, res) => {
+  try {
+    const currentPost = await Post.findById(req.params.id);
+    const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
+      completed: !currentPost.completed,
+      updatedAt: Date.now(),
+    });
+    res.json(updatedPost);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 
 module.exports = router;
