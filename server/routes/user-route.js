@@ -121,6 +121,12 @@ app.put("", async (req, res) => {
                       err: false,
                       msg: "Se cambio la contraseña",
                     });
+                  } else {
+                    return res.status(500).send({
+                      estatus: "500",
+                      err: true,
+                      msg: "Error",
+                    });
                   }
                 });
             });
