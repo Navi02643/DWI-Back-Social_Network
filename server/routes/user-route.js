@@ -66,9 +66,18 @@ app.post("/login", async (req, res) => {
       if (user) {
         bcrypt.compare(pass, user.pass).then((match) => {
           if (match) {
+            datuser= {
+              "_id": user._id,
+              "name": user.name,
+              "firstlastname": user.firstlastname,
+              "secondlastname": user.secondlastname,
+              "email": user.email,
+              "dateofbirth": user.dateofbirth
+            }
             return res.status(200).send({
               estatus: 200,
               err: false,
+              data: datuser,
               msg: `Welcome ${user.name} ${user.firstlastname} ${user.secondlastname}`,
             });
           } else {
