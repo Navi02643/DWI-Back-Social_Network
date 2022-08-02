@@ -61,6 +61,20 @@ router.patch("/complete/:id", async (req, res) => {
   }
 });
 
+ 
+router.patch("/delete/:id", async (req, res) => {
+  try {
+    const postDeleted = await Post.findByIdAndUpdate(req.params.id, {
+      deleted: true,
+      deletedAt: Date.now(),
+    });
+    res.json(postDeleted);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+
 router.delete("/:id", async (req, res) => {
   try {
     const deletedPost = await Post.deleteOne({ _id: req.params.id });
