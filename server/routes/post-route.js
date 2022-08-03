@@ -25,7 +25,9 @@ router.post("/", async (req, res) => {
     const post = new Post({
       title: req.body.title,
       description: req.body.description,
-      completed: req.body.completed,
+      ubication: req.body.ubication,
+      date: req.body.date,
+      // image: req.body.image
     });
     const postSaved = await post.save();
     res.json(postSaved);
@@ -39,7 +41,9 @@ router.put("/:id", async (req, res) => {
     const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
       title: req.body.title,
       description: req.body.description,
-      completed: req.body.completed,
+      ubication: req.body.ubication,
+      date: req.body.date,
+      // image: req.body.image
       updatedAt: Date.now(),
     });
     res.json(updatedPost);
