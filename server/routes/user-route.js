@@ -24,7 +24,7 @@ app.post("/", async (req, res) => {
       return res.status(200).json({
         err: true,
         resp: 200,
-        msg: "The email is registered in another account",
+        msg: "El correo ya se registro",
       });
     }
     bcrypt.genSalt(10, (err, salt) => {
@@ -36,13 +36,13 @@ app.post("/", async (req, res) => {
           return res.status(200).send({
             err: false,
             resp: 200,
-            msg: "User not registered",
+            msg: "El usuario no se registro",
           });
         } else {
           return res.status(200).send({
             err: true,
             resp: 200,
-            msg: "User registered",
+            msg: "Usuario registrado",
           });
         }
       });
@@ -69,13 +69,13 @@ app.post("/login", async (req, res) => {
             return res.status(200).send({
               estatus: 200,
               err: false,
-              msg: `Welcome ${user.name} ${user.firstlastname} ${user.secondlastname}`,
+              msg: `Bienvenido ${user.name} ${user.firstlastname} ${user.secondlastname}`,
             });
           } else {
             return res.status(200).send({
               estatus: 200,
               err: false,
-              msg: "Incorrect email or password",
+              msg: "Correo o contraseña incorrectos.",
             });
           }
         });
@@ -83,7 +83,66 @@ app.post("/login", async (req, res) => {
         return res.status(200).send({
           estatus: 200,
           err: false,
-          msg: "Incorrect email or password",
+          msg: "Correo o contraseña incorrectos.",
+        });
+      }
+    });
+  } catch (err) {
+    return res.status(500).send({
+      estatus: "500",
+      err: true,
+      msg: "Error",
+      cont: {
+        err: Object.keys(err).length === 0 ? err.message : err,
+      },
+    });
+  }
+});
+
+app.put("", async (req, res) => {
+  try {
+    const iduser = req.query.iduser;
+    const { passant, passnew } = req.body;
+    usermodel.findById(iduser).then((user) => {
+      if (user) {
+        bcrypt.compare(passant, user.pass).then((match) => {
+          if (match == true) {
+            bcrypt.hash(passnew, 10, (err, hash) => {
+              let newpasshash = hash;
+              usermodel
+                .findByIdAndUpdate(
+                  { _id: iduser },
+                  { $set: { pass: newpasshash } }
+                )
+                .then((resmongo) => {
+                  if (resmongo) {
+                    return res.status(200).send({
+                      estatus: "200",
+                      err: false,
+                      msg: "Se cambio la contraseña",
+                    });
+                  } else {
+                    return res.status(500).send({
+                      estatus: "500",
+                      err: true,
+                      msg: "Error",
+                    });
+                  }
+                });
+            });
+          } else {
+            return res.status(200).send({
+              estatus: "200",
+              err: true,
+              msg: "Las contraseñas no coinciden",
+            });
+          }
+        });
+      } else {
+        return res.status(200).send({
+          estatus: "200",
+          err: true,
+          msg: "El usuario no existe",
         });
       }
     });
