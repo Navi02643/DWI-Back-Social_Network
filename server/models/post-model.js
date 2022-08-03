@@ -11,17 +11,18 @@ const postSchema = new Schema({
         type: String
     },
     description: {
-        type: Text
+        type: String
     },
     ubication: {
         type: String
     },
     date: {
-        type: Date
+        type: Date,
+        default: Date.now,
     },
     image: {
         type: String
     }
 });
 
-module.exports = mongoose.model("post", postSchema);
+module.exports = mongoose.model("posts", postSchema);

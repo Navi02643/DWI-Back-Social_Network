@@ -1,17 +1,17 @@
 const express = require("express");
 const Post = require("../models/post-model");
-const router = express.Router();
+const app = express();
 
-router.get("/", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
-    const posts = await Post.find({ deleted: false });
+    const posts = await Post.find({ });
     res.json(posts);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-router.get("/:id", async (req, res) => {
+app.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     res.json(post);
@@ -20,13 +20,13 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+app.post("/", async (req, res) => {
   try {
     const post = new Post({
       title: req.body.title,
       description: req.body.description,
       ubication: req.body.ubication,
-      date: req.body.date,
+      // date: req.body.date,
       // image: req.body.image
     });
     const postSaved = await post.save();
@@ -36,13 +36,13 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+app.put("/:id", async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
       title: req.body.title,
       description: req.body.description,
       ubication: req.body.ubication,
-      date: req.body.date,
+      // date: req.body.date,
       // image: req.body.image
       updatedAt: Date.now(),
     });
@@ -52,11 +52,11 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.patch("/complete/:id", async (req, res) => {
+app.patch("/complete/:id", async (req, res) => {
   try {
-    const currentPost = await Post.findById(req.params.id);
+    // const currentPost = await Post.findById(req.params.id);
     const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
-      completed: !currentPost.completed,
+      // completed: !currentPost.completed,
       updatedAt: Date.now(),
     });
     res.json(updatedPost);
@@ -66,7 +66,7 @@ router.patch("/complete/:id", async (req, res) => {
 });
 
  
-router.patch("/delete/:id", async (req, res) => {
+app.patch("/delete/:id", async (req, res) => {
   try {
     const postDeleted = await Post.findByIdAndUpdate(req.params.id, {
       deleted: true,
@@ -79,7 +79,7 @@ router.patch("/delete/:id", async (req, res) => {
 });
 
 
-router.delete("/:id", async (req, res) => {
+app.delete("/:id", async (req, res) => {
   try {
     const deletedPost = await Post.deleteOne({ _id: req.params.id });
     res.json(deletedPost);
@@ -89,4 +89,4 @@ router.delete("/:id", async (req, res) => {
 });
 
 
-module.exports = router;
+module.exports = app;
