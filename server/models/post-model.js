@@ -5,7 +5,7 @@ const postSchema = new Schema({
     iduser: {
         type: Schema.Types.ObjectId,
         ref: "user",
-        required: [true, "The Id is required"],
+        // required: [true, "The Id is required"],
     },
     title: {
         type: String

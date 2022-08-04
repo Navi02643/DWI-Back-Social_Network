@@ -2,6 +2,8 @@ const express = require("express");
 const Post = require("../models/post-model");
 const app = express();
 
+
+//Obtener publicación:
 app.get("/", async (req, res) => {
   try {
     const posts = await Post.find({ });
@@ -11,6 +13,7 @@ app.get("/", async (req, res) => {
   }
 });
 
+//Obtener publicación por id:
 app.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -20,6 +23,8 @@ app.get("/:id", async (req, res) => {
   }
 });
 
+
+//Crear publicación:
 app.post("/", async (req, res) => {
   try {
     const post = new Post({
@@ -36,6 +41,8 @@ app.post("/", async (req, res) => {
   }
 });
 
+
+//Actualizar publicación:
 app.put("/:id", async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
@@ -78,7 +85,7 @@ app.patch("/delete/:id", async (req, res) => {
   }
 });
 
-
+//Eliminar publicación:
 app.delete("/:id", async (req, res) => {
   try {
     const deletedPost = await Post.deleteOne({ _id: req.params.id });
