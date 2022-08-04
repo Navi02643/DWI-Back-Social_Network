@@ -25,3 +25,16 @@ app.post("/", async (req, res) => {
       res.status(500).send(error);
     }
   });
+
+  //Actualizar like:
+app.put("/:id", async (req, res) => {
+    try {
+      const updatedLike = await Like.findByIdAndUpdate(req.params.id, {
+        like: req.body.like,
+        updatedAt: Date.now(),
+      });
+      res.json(updatedLike);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
