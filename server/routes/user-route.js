@@ -34,13 +34,13 @@ app.post("/", async (req, res) => {
         const newuser = user.save();
         if (newuser.length < 0) {
           return res.status(200).send({
-            err: false,
+            err: true,
             resp: 200,
             msg: "El usuario no se registro",
           });
         } else {
           return res.status(200).send({
-            err: true,
+            err: false,
             resp: 200,
             msg: "Usuario registrado",
           });
