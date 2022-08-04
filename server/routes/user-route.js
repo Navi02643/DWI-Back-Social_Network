@@ -21,7 +21,7 @@ app.post("/", async (req, res) => {
       email: user.email,
     });
     if (userfind) {
-      return res.status(200).json({
+      return res.status(200).send({
         err: true,
         resp: 200,
         msg: "El correo ya se registro",
@@ -74,7 +74,7 @@ app.post("/login", async (req, res) => {
           } else {
             return res.status(200).send({
               estatus: 200,
-              err: false,
+              err: true,
               msg: "Correo o contraseña incorrectos.",
             });
           }
@@ -82,7 +82,7 @@ app.post("/login", async (req, res) => {
       } else {
         return res.status(200).send({
           estatus: 200,
-          err: false,
+          err: true,
           msg: "Correo o contraseña incorrectos.",
         });
       }
