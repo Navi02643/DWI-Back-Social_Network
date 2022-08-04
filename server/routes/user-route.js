@@ -99,7 +99,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.put("", async (req, res) => {
+app.put("/", async (req, res) => {
   try {
     const iduser = req.query.iduser;
     const { passant, passnew } = req.body;
