@@ -12,3 +12,16 @@ app.get("/", async (req, res) => {
       res.status(500).send(error);
     }
   });
+
+  //Crear like:
+app.post("/", async (req, res) => {
+    try {
+      const like = new Like({
+        like: req.body.like,
+      });
+      const likeSaved = await like.save();
+      res.json(likeSaved);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
