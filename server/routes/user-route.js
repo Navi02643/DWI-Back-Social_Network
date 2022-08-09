@@ -70,6 +70,7 @@ app.post("/login", async (req, res) => {
               estatus: 200,
               err: false,
               msg: `Bienvenido ${user.name} ${user.firstlastname} ${user.secondlastname}`,
+              userdata: user
             });
           } else {
             return res.status(200).send({
