@@ -31,8 +31,9 @@ app.post("/", async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       ubication: req.body.ubication,
+      like: false,
+      image: req.body.image
       // date: req.body.date,
-      // image: req.body.image
     });
     const postSaved = await post.save();
     res.json(postSaved);
@@ -49,8 +50,9 @@ app.put("/:id", async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       ubication: req.body.ubication,
+      image: req.body.image,
+      like: req.body.like,
       // date: req.body.date,
-      // image: req.body.image
       updatedAt: Date.now(),
     });
     res.json(updatedPost);
