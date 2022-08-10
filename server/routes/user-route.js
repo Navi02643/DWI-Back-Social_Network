@@ -27,25 +27,23 @@ app.post("/", async (req, res) => {
         msg: "El correo ya se registro",
       });
     }
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(user.pass, salt, (err, hash) => {
-        if (err) throw err;
-        user.pass = hash;
-        const newuser = user.save();
-        if (newuser.length < 0) {
-          return res.status(200).send({
-            err: true,
-            resp: 200,
-            msg: "El usuario no se registro",
-          });
-        } else {
-          return res.status(200).send({
-            err: false,
-            resp: 200,
-            msg: "Usuario registrado",
-          });
-        }
-      });
+    bcrypt.hash(user.pass, 10, (err, hash) => {
+      if (err) return res.status(500).send({ err });
+      user.pass = hash;
+      const newuser = user.save();
+      if (newuser.length < 0) {
+        return res.status(200).send({
+          err: true,
+          resp: 200,
+          msg: "El usuario no se registro",
+        });
+      } else {
+        return res.status(200).send({
+          err: false,
+          resp: 200,
+          msg: "Usuario registrado",
+        });
+      }
     });
   } catch (err) {
     return res.status(500).send({
@@ -70,7 +68,7 @@ app.post("/login", async (req, res) => {
               estatus: 200,
               err: false,
               msg: `Bienvenido ${user.name} ${user.firstlastname} ${user.secondlastname}`,
-              userdata: user
+              userdata: user,
             });
           } else {
             return res.status(200).send({
