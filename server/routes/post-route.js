@@ -31,6 +31,7 @@ app.post("/", async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       ubication: req.body.ubication,
+      image: req.body.image,
       // date: req.body.date,
       // image: req.body.image
     });

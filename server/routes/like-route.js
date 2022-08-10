@@ -18,6 +18,8 @@ app.post("/", async (req, res) => {
     try {
       const like = new Like({
         like: req.body.like,
+        iduser: req.body.iduser,
+        Idpost: req.body.Idpost
       });
       const likeSaved = await like.save();
       res.json(likeSaved);
