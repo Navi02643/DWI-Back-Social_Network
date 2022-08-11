@@ -21,6 +21,9 @@ const postSchema = new Schema({
     },
     image: {
         type: String
+    },
+    like: {
+        type: Boolean
     }
 });
 
