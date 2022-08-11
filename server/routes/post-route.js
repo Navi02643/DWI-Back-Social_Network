@@ -28,6 +28,7 @@ app.get("/:id", async (req, res) => {
 app.post("/", async (req, res) => {
   try {
     const post = new Post({
+      username: req.body.username,
       title: req.body.title,
       description: req.body.description,
       ubication: req.body.ubication,
@@ -47,6 +48,7 @@ app.post("/", async (req, res) => {
 app.put("/:id", async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
+      username: req.body.user,
       title: req.body.title,
       description: req.body.description,
       ubication: req.body.ubication,

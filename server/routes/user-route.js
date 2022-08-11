@@ -157,4 +157,41 @@ app.put("/", async (req, res) => {
   }
 });
 
+app.put("/useredit", async (req, res) => {
+  try {
+    const idUser = req.query.iduser;
+    const useract = new usermodel(req.body);
+    const userupdate = await usermodel.findByIdAndUpdate(
+      idUser,
+      { $set: useract },
+      { new: true }
+    );
+    console.log(userupdate)
+    if (!userupdate) {
+      return res.status(400).json({
+        ok: false,
+        resp: 400,
+        msg: "Error: Trying to update the user.",
+        cont: 0,
+      });
+    } else {
+      return res.status(200).json({
+        ok: true,
+        resp: 200,
+        msg: "Success: The user was updated successfully.",
+        
+      });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      estatus: "500",
+      err: true,
+      msg: "Error",
+      cont: {
+        err: Object.keys(err).length === 0 ? err.message : err,
+      },
+    });
+  }
+});
+
 module.exports = app;
