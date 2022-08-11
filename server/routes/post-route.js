@@ -32,8 +32,8 @@ app.post("/", async (req, res) => {
       description: req.body.description,
       ubication: req.body.ubication,
       like: false,
-      image: req.body.image
-      // date: req.body.date,
+      image: req.body.image,
+      date: req.body.date,
     });
     const postSaved = await post.save();
     res.json(postSaved);
